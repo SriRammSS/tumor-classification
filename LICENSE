@@ -1,0 +1,58 @@
+Academic Non-Commercial Research License
+
+Copyright (c) 2023 Sri Ramm Sekar Sasirekha, Kamali R, S M Kishorkumar,
+K V Prasanna Venkatesh, and Suguna G.
+Amrita School of Engineering, Coimbatore, India.
+
+Publication: "Cross Organ Bridge Transfer Learning for Lung Cancer Detection"
+IEEE R10-HTC 2023 · DOI: 10.1109/R10-HTC57504.2023.10461796
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PERMITTED USES (with attribution):
+  ✅ Academic research and study
+  ✅ Educational purposes and teaching
+  ✅ Citation in academic publications (cite the IEEE paper above)
+  ✅ Non-commercial experimentation and benchmarking
+
+PROHIBITED USES:
+  ❌ Commercial use of any kind
+  ❌ Training or fine-tuning models for commercial products
+  ❌ Redistribution of trained model weights without written permission
+  ❌ Use of the CT scan datasets outside the terms of their original licenses
+  ❌ Claiming authorship or removing attribution
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ATTRIBUTION REQUIREMENT:
+Any use of this code, methodology, or results must cite:
+
+  S. S. Sriramm, R. Kamali, S. M. Kishorkumar, K. V. P. Venkatesh, and G. Suguna,
+  "Cross Organ Bridge Transfer Learning for Lung Cancer Detection,"
+  2023 IEEE 11th Region 10 Humanitarian Technology Conference (R10-HTC),
+  2023, pp. 876–883, doi: 10.1109/R10-HTC57504.2023.10461796.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+MODEL WEIGHTS & TRAINING CODE:
+The trained model weights (.hdf5 files) and core training notebooks
+implementing the bridge transfer learning pipeline are proprietary
+and are NOT included in this public repository.
+
+To request access for academic collaboration, contact:
+  srirammsekar07@gmail.com
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DISCLAIMER:
+This software is provided for research purposes only. It is NOT
+intended for clinical use or medical decision-making. Always consult
+a qualified medical professional for diagnosis.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
+THE AUTHORS SHALL NOT BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY ARISING FROM THE USE OF THIS SOFTWARE.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+For commercial licensing inquiries: srirammsekar07@gmail.com

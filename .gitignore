@@ -1,0 +1,62 @@
+# ══════════════════════════════════════════════════════════════════
+# PROTECTED — DO NOT COMMIT (Proprietary Research IP)
+# ══════════════════════════════════════════════════════════════════
+
+# Trained model weights — proprietary, available on request
+*.hdf5
+*.h5
+*.pb
+saved_model/
+
+# CT scan datasets — medical data, licensed separately
+kidney_tumor_dataset/
+lung_cancer_dataset/
+lung_cancer_dataset_balanced/
+
+# Training notebooks — core bridge learning implementation, available on request
+KUB-ct-scan-VGG19*.ipynb
+chest-ct-scan-VGG19*.ipynb
+lung-ct-scan-VGG19*.ipynb
+Comparsion.ipynb
+
+# ══════════════════════════════════════════════════════════════════
+# Standard ignores
+# ══════════════════════════════════════════════════════════════════
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Environment files
+.env
+.env.local
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+.AppleDouble
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Generated files
+generate_interview_guide.py
+
+# Uploaded CT scan images (runtime user uploads)
+Webapp_Kidney_tumor/static/images/*.jpg
+Webapp_Kidney_tumor/static/images/*.jpeg
+Webapp_Kidney_tumor/static/images/*.png
+Webapp_lung_Cancer/static/images/*.jpg
+Webapp_lung_Cancer/static/images/*.jpeg
+Webapp_lung_Cancer/static/images/*.png
