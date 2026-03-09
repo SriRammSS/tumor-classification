@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🫁 Cross-Organ Bridge Transfer Learning for Lung Cancer Detection
+# Cross-Organ Bridge Transfer Learning for Lung Cancer Detection
 
 ### IEEE Published Research — BTech Capstone Project
 
@@ -46,16 +46,16 @@ This project proposes a **Modality-Bridge Transfer Learning** framework for medi
 Traditional transfer learning:
 ```
 ImageNet (natural photos) ──────────────────→ Lung CT scans
-         Source                                    Target
-         [Large domain gap — different textures, structures, imaging artifacts]
+ Source Target
+ [Large domain gap — different textures, structures, imaging artifacts]
 ```
 
 ### The Solution: Cross-Organ Bridge Transfer Learning
 ```
 ImageNet → Kidney CT scans → Lung CT scans
- Source        Bridge           Target
-         [Same CT modality]  [Same CT modality]
-         [Smaller gap]       [Organ-level feature transfer]
+ Source Bridge Target
+ [Same CT modality] [Same CT modality]
+ [Smaller gap] [Organ-level feature transfer]
 ```
 
 By inserting a **bridge domain** — kidney CT scans, which share the same acquisition modality (CT) as the target lung CT — the model progressively adapts from natural image features to medical CT features before reaching the target task. This reduces distribution mismatch and improves generalization even with limited labelled target data.
@@ -68,24 +68,24 @@ By inserting a **bridge domain** — kidney CT scans, which share the same acqui
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                    Modality-Bridge Transfer Learning Pipeline                │
-│                                                                               │
-│  Step 1: Pre-train on ImageNet (natural images — 14M images, 1000 classes)  │
-│                            │                                                  │
-│                            ▼                                                  │
-│  Step 2: Fine-tune on Kidney CT Dataset (bridge domain — same CT modality)  │
-│          → VGG19 learns CT-specific features: tissue density, organ         │
-│            boundaries, contrast gradients, bone structure                    │
-│          → Achieves 95.6% accuracy on kidney tumor classification            │
-│                            │                                                  │
-│                            ▼                                                  │
-│  Step 3: Transfer to Lung CT Dataset (target domain)                         │
-│          → Model already understands CT imaging characteristics              │
-│          → Fine-tune final layers for lung cancer histology                  │
-│          → Achieves 93% accuracy (vs 90% without bridge)                     │
-│                                                                               │
-│  KEY INSIGHT: Same modality (CT) → Shared low-level features                │
-│  (edges, textures, density gradients) transfer cleanly across organs        │
+│ Modality-Bridge Transfer Learning Pipeline │
+│ │
+│ Step 1: Pre-train on ImageNet (natural images — 14M images, 1000 classes) │
+│ │ │
+│ ▼ │
+│ Step 2: Fine-tune on Kidney CT Dataset (bridge domain — same CT modality) │
+│ → VGG19 learns CT-specific features: tissue density, organ │
+│ boundaries, contrast gradients, bone structure │
+│ → Achieves 95.6% accuracy on kidney tumor classification │
+│ │ │
+│ ▼ │
+│ Step 3: Transfer to Lung CT Dataset (target domain) │
+│ → Model already understands CT imaging characteristics │
+│ → Fine-tune final layers for lung cancer histology │
+│ → Achieves 93% accuracy (vs 90% without bridge) │
+│ │
+│ KEY INSIGHT: Same modality (CT) → Shared low-level features │
+│ (edges, textures, density gradients) transfer cleanly across organs │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -102,7 +102,7 @@ The paper also introduces **Multi-Bridge Transfer Learning**, which allows lever
 |-------|--------|----------|
 | Baseline VGG19 | Lung CT (standalone) | 90% |
 | Bridge VGG19 | Kidney CT (bridge) | **95.6%** |
-| **Bridge Transfer** | **Lung CT (via Kidney CT bridge)** | **93% ✅** |
+| **Bridge Transfer** | **Lung CT (via Kidney CT bridge)** | **93% ** |
 
 > **Key finding:** Bridge transfer learning improves Lung CT classification by **+3%** over the standalone baseline — demonstrating effective cross-organ knowledge transfer.
 
@@ -145,26 +145,26 @@ The paper also introduces **Multi-Bridge Transfer Learning**, which allows lever
 
 ```
 Input Image (224×224×3)
-        │
-        ▼
+ │
+ ▼
 ┌─────────────────────┐
-│  Block 1            │  2× Conv(64, 3×3) + ReLU → MaxPool(2×2)
+│ Block 1 │ 2× Conv(64, 3×3) + ReLU → MaxPool(2×2)
 ├─────────────────────┤
-│  Block 2            │  2× Conv(128, 3×3) + ReLU → MaxPool(2×2)
+│ Block 2 │ 2× Conv(128, 3×3) + ReLU → MaxPool(2×2)
 ├─────────────────────┤
-│  Block 3            │  4× Conv(256, 3×3) + ReLU → MaxPool(2×2)
+│ Block 3 │ 4× Conv(256, 3×3) + ReLU → MaxPool(2×2)
 ├─────────────────────┤
-│  Block 4            │  4× Conv(512, 3×3) + ReLU → MaxPool(2×2)
+│ Block 4 │ 4× Conv(512, 3×3) + ReLU → MaxPool(2×2)
 ├─────────────────────┤
-│  Block 5            │  4× Conv(512, 3×3) + ReLU → MaxPool(2×2)
+│ Block 5 │ 4× Conv(512, 3×3) + ReLU → MaxPool(2×2)
 ├─────────────────────┤
-│  Flatten            │  7×7×512 = 25,088 features
+│ Flatten │ 7×7×512 = 25,088 features
 ├─────────────────────┤
-│  FC-4096 + Dropout  │  Fine-tuned for medical domain
+│ FC-4096 + Dropout │ Fine-tuned for medical domain
 ├─────────────────────┤
-│  FC-4096 + Dropout  │  Fine-tuned for medical domain
+│ FC-4096 + Dropout │ Fine-tuned for medical domain
 ├─────────────────────┤
-│  Output (Softmax)   │  Kidney: 2 classes | Lung: 4 classes
+│ Output (Softmax) │ Kidney: 2 classes | Lung: 4 classes
 └─────────────────────┘
 ```
 
@@ -187,10 +187,10 @@ Input Image (224×224×3)
 ### Lung Cancer CT Dataset (Target Domain)
 - **Task:** Multi-class classification — 4 histological subtypes
 - **Classes:**
-  - `Adenocarcinoma` — solid nodule with spiculated margins, ground-glass opacity
-  - `Large Cell Carcinoma` — large mass with irregular borders and necrotic center
-  - `Squamous Cell Carcinoma` — cavitary lesion with thick walls and calcifications
-  - `Normal` — healthy lung tissue
+ - `Adenocarcinoma` — solid nodule with spiculated margins, ground-glass opacity
+ - `Large Cell Carcinoma` — large mass with irregular borders and necrotic center
+ - `Squamous Cell Carcinoma` — cavitary lesion with thick walls and calcifications
+ - `Normal` — healthy lung tissue
 - **Modality:** Chest CT scan
 
 ### Data Preprocessing
@@ -223,44 +223,44 @@ Two Flask web apps are included for live inference:
 ```
 Tumor Classification/
 │
-├── 📓 Notebooks (Training)
-│   ├── KUB-ct-scan-VGG19(for-kidney-tumors).ipynb     # Kidney tumor VGG19 training
-│   ├── chest-ct-scan-VGG19-with-transfer-learning.ipynb # Lung cancer VGG19 training
-│   ├── lung-ct-scan-VGG19(for-lung-tumors)-D2.ipynb    # Lung cancer balanced training
-│   └── Comparsion.ipynb                                 # Model comparison analysis
+├── Notebooks (Training)
+│ ├── KUB-ct-scan-VGG19(for-kidney-tumors).ipynb # Kidney tumor VGG19 training
+│ ├── chest-ct-scan-VGG19-with-transfer-learning.ipynb # Lung cancer VGG19 training
+│ ├── lung-ct-scan-VGG19(for-lung-tumors)-D2.ipynb # Lung cancer balanced training
+│ └── Comparsion.ipynb # Model comparison analysis
 │
-├── 🤖 Trained Models
-│   ├── kidney_tumor_model.hdf5         # Kidney VGG19 model weights
-│   ├── lung_cancer_model.hdf5          # Lung VGG19 model weights (unbalanced)
-│   ├── lung_cancer_B_model.hdf5        # Lung VGG19 model weights (balanced)
-│   └── chest_CT_SCAN.h5               # Chest CT scan model
+├── Trained Models
+│ ├── kidney_tumor_model.hdf5 # Kidney VGG19 model weights
+│ ├── lung_cancer_model.hdf5 # Lung VGG19 model weights (unbalanced)
+│ ├── lung_cancer_B_model.hdf5 # Lung VGG19 model weights (balanced)
+│ └── chest_CT_SCAN.h5 # Chest CT scan model
 │
-├── 📊 Results/
-│   ├── VGG_KUB_cancer_result.png       # Kidney model training curves
-│   ├── VGG_lung_cancer_result.png      # Lung model training curves (unbalanced)
-│   └── VGG_lung_cancer_balanced_results.png  # Lung model training curves (balanced)
+├── Results/
+│ ├── VGG_KUB_cancer_result.png # Kidney model training curves
+│ ├── VGG_lung_cancer_result.png # Lung model training curves (unbalanced)
+│ └── VGG_lung_cancer_balanced_results.png # Lung model training curves (balanced)
 │
-├── 🌐 Webapp_Kidney_tumor/
-│   ├── app.py                          # Flask application
-│   ├── model.hdf5                      # Deployed kidney model
-│   ├── templates/index.html            # Upload page
-│   ├── templates/success.html          # Results page
-│   └── static/                         # CSS and uploaded images
+├── Webapp_Kidney_tumor/
+│ ├── app.py # Flask application
+│ ├── model.hdf5 # Deployed kidney model
+│ ├── templates/index.html # Upload page
+│ ├── templates/success.html # Results page
+│ └── static/ # CSS and uploaded images
 │
-├── 🌐 Webapp_lung_Cancer/
-│   ├── app.py                          # Flask application
-│   ├── model.hdf5                      # Deployed lung cancer model
-│   ├── templates/index.html            # Upload page
-│   ├── templates/success.html          # Results page
-│   └── static/                         # CSS and uploaded images
+├── Webapp_lung_Cancer/
+│ ├── app.py # Flask application
+│ ├── model.hdf5 # Deployed lung cancer model
+│ ├── templates/index.html # Upload page
+│ ├── templates/success.html # Results page
+│ └── static/ # CSS and uploaded images
 │
-├── 📁 kidney_tumor_dataset/            # Kidney CT scan dataset
-├── 📁 lung_cancer_dataset/             # Lung CT scans (original)
-├── 📁 lung_cancer_dataset_balanced/    # Lung CT scans (balanced)
+├── kidney_tumor_dataset/ # Kidney CT scan dataset
+├── lung_cancer_dataset/ # Lung CT scans (original)
+├── lung_cancer_dataset_balanced/ # Lung CT scans (balanced)
 │
-├── 📄 requirements.txt
-├── 📄 Interview_Guide.pdf              # Detailed interview preparation guide
-└── 📄 README.md
+├── requirements.txt
+├── Interview_Guide.pdf # Detailed interview preparation guide
+└── README.md
 ```
 
 ---
@@ -280,7 +280,7 @@ cd "tumor-classification"
 
 # Create virtual environment
 python3 -m venv venv
-source venv/bin/activate      # Windows: venv\Scripts\activate
+source venv/bin/activate # Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install tensorflow tf-keras Flask==2.2.2 Pillow Werkzeug==2.2.3 Flask-Cors
@@ -320,25 +320,25 @@ jupyter notebook
 
 | Asset | Status | Reason |
 |-------|--------|--------|
-| Flask web application code | ✅ Public | Deployment layer only |
-| Web UI templates & CSS | ✅ Public | Frontend only |
-| Training result plots | ✅ Public | Already in IEEE paper |
-| Interview guide | ✅ Public | Documentation only |
-| `requirements.txt` | ✅ Public | Standard setup |
+| Flask web application code | Public | Deployment layer only |
+| Web UI templates & CSS | Public | Frontend only |
+| Training result plots | Public | Already in IEEE paper |
+| Interview guide | Public | Documentation only |
+| `requirements.txt` | Public | Standard setup |
 
 ### What Is Protected (Available on Request)
 
 | Asset | Status | Reason |
 |-------|--------|--------|
-| Trained model weights (`.hdf5`) | 🔒 On Request | Proprietary — months of compute, novel training pipeline |
-| Training notebooks | 🔒 On Request | Core bridge learning implementation — the published IP |
-| CT scan datasets | 🔒 On Request | Medical data — licensed separately, not for redistribution |
+| Trained model weights (`.hdf5`) | On Request | Proprietary — months of compute, novel training pipeline |
+| Training notebooks | On Request | Core bridge learning implementation — the published IP |
+| CT scan datasets | On Request | Medical data — licensed separately, not for redistribution |
 
 ### Requesting Access
 
 For **academic collaboration**, research reproduction, or dataset access, contact:
 
-📧 **srirammsekar07@gmail.com**
+ **srirammsekar07@gmail.com**
 
 Include in your request:
 - Your institution and role
@@ -353,13 +353,13 @@ If you use this work, you **must** cite the IEEE paper:
 
 ```bibtex
 @inproceedings{sriramm2023crossorgan,
-  author    = {Sriramm, S. S. and Kamali, R. and Kishorkumar, S. M.
-               and Venkatesh, K. V. Prasanna and Suguna, G.},
-  title     = {Cross Organ Bridge Transfer Learning for Lung Cancer Detection},
-  booktitle = {2023 IEEE 11th Region 10 Humanitarian Technology Conference (R10-HTC)},
-  year      = {2023},
-  pages     = {876--883},
-  doi       = {10.1109/R10-HTC57504.2023.10461796}
+ author = {Sriramm, S. S. and Kamali, R. and Kishorkumar, S. M.
+ and Venkatesh, K. V. Prasanna and Suguna, G.},
+ title = {Cross Organ Bridge Transfer Learning for Lung Cancer Detection},
+ booktitle = {2023 IEEE 11th Region 10 Humanitarian Technology Conference (R10-HTC)},
+ year = {2023},
+ pages = {876--883},
+ doi = {10.1109/R10-HTC57504.2023.10461796}
 }
 ```
 
